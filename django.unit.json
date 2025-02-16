@@ -1,0 +1,25 @@
+{
+  "listeners": {
+    "*:80": {
+      "pass": "routes"
+    }
+  },
+  "routes": [
+    {
+      "action": {
+        "pass": "applications/django_asgi"
+      }
+    }
+  ],
+  "applications": {
+    "django_asgi": {
+      "type": "python 3",
+      "path": "/app",
+      "module": "core.asgi",
+      "protocol": "asgi"
+    }
+  },
+  "access_log": {
+    "path": "/dev/stdout"
+  }
+}
