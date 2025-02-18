@@ -1,0 +1,34 @@
+name: django_unit_asgi
+
+services:
+  daphne:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: daphne -b 0.0.0.0 core.asgi:application
+    ports:
+      - 8001:8000
+
+  unit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: unitd --no-daemon --control unix:/var/run/control.unit.sock
+    ports:
+      - 8002:8000
+
+  uvicorn:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: uvicorn --host 0.0.0.0 core.asgi:application
+    ports:
+      - 8003:8000
+
+  granian:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: granian --host 0.0.0.0 --interface asginl --access-log core.asgi:application
+    ports:
+      - 8004:8000
