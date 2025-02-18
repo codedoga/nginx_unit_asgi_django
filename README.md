@@ -5,7 +5,6 @@ This project demonstrates how to reproduce bug when running ASGI Django on Nginx
 ## Prerequisites
 
 - Docker installed on your machine
-- Docker image built for this project
 
 ## Building and running containers
 
